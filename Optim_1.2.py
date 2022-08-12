@@ -53,7 +53,7 @@ def Ultra_Optim(j):
     #1-import the data into ntwk variable
     #####################################
 
-    ntwk = rf.Network('/home/hedinyer/Documents/python_germany/optimization/optinization_1/P450U_W1_WR1_WC1_SR46_SC1.S1P')
+    ntwk = rf.Network('/home/hedinyer/Documents/python_germany/optimization/optinization_1/Com_Optimization_py/P450U_W1_WR1_WC1_SR46_SC1.S1P')
 
     #2-and now with the loaded data it's possible to 
     #  asign it into multiple variables like the frecuency and 
@@ -382,10 +382,14 @@ def Ultra_Optim(j):
 
 x0=[5,5,1000,1000,1000,1000,1000,0.2,1e-5]
 bnds=((1.5,12),(1.5,12),(0.1,5000),(0.1,5000),(0.1,5000),(0.1,5000),(0.1,5000),(0.1,0.4),(1e-15,1e-1))
-res2 = minimize(Ultra_Optim,x0,method='Nelder-Mead', bounds=(bnds))
+res2 = minimize(Ultra_Optim,x0,method='Nelder-Mead', bounds=(bnds),options={'maxfev':300})
 print(res2.x)
 
+res3 = minimize(Ultra_Optim,res2.x,method='Nelder-Mead', bounds=(bnds),options={'maxfev':300})
+print(res3.x)
 
+res4 = minimize(Ultra_Optim,res3.x,method='Nelder-Mead', bounds=(bnds),options={'maxfev':300})
+print(res4.x)
 
 
 
